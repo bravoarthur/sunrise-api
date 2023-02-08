@@ -2,13 +2,13 @@ import { Schema, model, Model, connection, Types } from "mongoose";
 
 export type OrderType = {
     idAdm: Types.ObjectId | string;
-    userchecker: string;
+    userchecker?: string;
     idSuplier: Types.ObjectId | string;
     orderDate: Date;
     checkDate: Date;
     status: 'OPEN' | 'CLOSE' | 'DIVERGENT';
-    listOrder: [{idProduct: string, product: string, qtd: number}];
-    listCheck: [{idProduct: string, product: string, qtd: number}]        
+    listOrder: [{idProduct: string, product: string, qtd: number, image: string}];
+    listCheck: [{idProduct: string, product: string, qtd: number, image: string}]        
 };
 
 const schema = new Schema<OrderType>({

@@ -1,5 +1,9 @@
 import { Router, Request, Response } from "express";
 import AuthController from "../controllers/AuthController";
+import CategoryController from "../controllers/CategoryController";
+import OrderController from "../controllers/OrderController";
+import ProductsController from "../controllers/ProductsController";
+import SuplierController from "../controllers/SuplierController";
 import UserController from "../controllers/UserController";
 import Auth from "../middlewares/Auth";
 import AuthValidator from "../validators/AuthValidator";
@@ -23,25 +27,26 @@ router.post('/user/register', AuthValidator.signup, AuthController.signup)
 router.delete('/user/delete', Auth.private, UserController.userDelete )
 
 //CATEGORY /////////////////////////////////////
-router.get('/category/list')
-router.post('/category/add') // auth
-router.delete('./category/delete') //auth
+router.get('/category/list', CategoryController.categoryList)
+router.post('/category/add', Auth.private, CategoryController.addCategory) // auth
+router.delete('/category/delete', Auth.private, CategoryController.categoryDelete) //auth
 
 //SUPLIER /////////////////////////////////////
-router.get('/suplier/list')
-router.post('/suplier/add') // auth
-router.delete('./suplier/delete') //auth
+router.get('/suplier/list', SuplierController.suplierList)
+router.post('/suplier/add', Auth.private, SuplierController.addSuplier) // auth
+router.delete('/suplier/delete', Auth.private, SuplierController.suplierDelete) //auth
 
 //PRODUCTS ////////////////////////////////////
-router.get('/products/list')
-router.post('/products/add') // auth
-router.delete('./products/delete') //auth
+router.get('/products/list', ProductsController.productsList)
+router.post('/products/add', Auth.private, ProductsController.addProduct) // auth
+router.delete('/products/delete', Auth.private, ProductsController.productDelete) //auth
 
 // ORDER /////////////////////////////////////
 router.get('/order/list')
-router.post('/order/add') // auth
-router.post('/order/check')
-router.put('./order/delete') //auth
+router.post('/order/add', Auth.private, OrderController.addOrder) // auth
+router.post('/order/check', OrderController.addCheck)
+router.put('/order/finish',Auth.private, OrderController.finish ) //auth
+
 
 /*
 router.get("/states", UserController.getStates);

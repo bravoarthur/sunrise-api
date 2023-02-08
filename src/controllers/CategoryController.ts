@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User, { UserWithId } from "../models/user";
 import Categories from "../models/categories";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import bcrypt from "bcrypt";
 import validateAndGetData from "../helpers/validatorHelper";
 import errorOjectHandler from "../helpers/errorObjectHandler";
@@ -9,40 +9,69 @@ import errorOjectHandler from "../helpers/errorObjectHandler";
 
 const CategoryController = {
     
-    userList: async (req: Request, res: Response) => {        
-        const userList = await User.find()
-        res.json({userList: userList})
+    categoryList: async (req: Request, res: Response) => {        
+        const categoryList = await Categories.find().exec()
+        res.json({categoryList: categoryList})
     },
 
-    userDelete: async (req: Request, res: Response) => {
+    addCategory: async (req: Request, res: Response) => {
+
+        let newName = ''
+
+        if(!req.body.newCategory) {
+            res.json(errorOjectHandler('Category', 'Please, provide a Category to add'));
+            return;
+        } else {
+            newName = req.body.newCategory
+        }
+        
+        const verifier = await Categories.findOne({name: newName}).exec()
+        
+        if(verifier) {
+            res.json(errorOjectHandler('Category', 'This Category already Exists'));
+            return;
+        }
+
+        const slug = newName.replace(/\s/g, '').toLowerCase()
+        console.log(slug)
+        const newCategory = new Categories({
+            name: newName,
+            slug: slug
+        })
+        await newCategory.save()
+        
+        res.json({status: 'New Category Added'})
+    },
+
+
+
+    categoryDelete: async (req: Request, res: Response) => {
 
         let idToDelete = ''
         
-        if(!req.body.idUserDelete) {            
-            res.json(errorOjectHandler('user', 'Please, provide a user to be deleted'));
+        if(!req.body.idCategoryDelete) {            
+            res.json(errorOjectHandler('Category', 'Please, provide a Category to be deleted'));
             return;
 
         } else {
-            idToDelete = req.body.idUserDelete
-        }
-
-        if(!req.body.idUser) {
-            res.json(errorOjectHandler('user', 'Please, login before delete an user'));
+            idToDelete = req.body.idCategoryDelete
+        } 
+        
+        if (!isValidObjectId(idToDelete)) {
+            res.status(400);
+            res.json({
+                error: { message: "No Category selected - Check Category ID" }
+            });
             return;
         }
 
-        if(req.body.idUser === idToDelete) {
-            res.json(errorOjectHandler('user', 'You cannot delete the user you are logged. Please log with another user to Delete'));
-            return;
-        }
-
-        const user = await User.findById(idToDelete)
-        if(!user) {
-            res.json(errorOjectHandler('user', 'user not found'));
+        const categoryDeleted = await Categories.findById(idToDelete)
+        if(!categoryDeleted) {
+            res.json(errorOjectHandler('Category', 'Category not found'));
             return
         }
-        await user.delete() 
-        res.json({status: 'user deleted'})      
+        await categoryDeleted.delete() 
+        res.json({status: 'Category deleted'})      
     },    
 };
 

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User, { UserWithId } from "../models/user";
 import Categories from "../models/categories";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import bcrypt from "bcrypt";
 import validateAndGetData from "../helpers/validatorHelper";
 import errorOjectHandler from "../helpers/errorObjectHandler";
@@ -19,7 +19,7 @@ const UserController = {
         let idToDelete = ''
         
         if(!req.body.idUserDelete) {            
-            res.json(errorOjectHandler('user', 'Please, provide a user to be deleted'));
+            res.json(errorOjectHandler('user', 'Please, provide an user to be deleted'));
             return;
 
         } else {
@@ -33,6 +33,14 @@ const UserController = {
 
         if(req.body.idUser === idToDelete) {
             res.json(errorOjectHandler('user', 'You cannot delete the user you are logged. Please log with another user to Delete'));
+            return;
+        }
+
+        if (!isValidObjectId(idToDelete)) {
+            res.status(400);
+            res.json({
+                error: { message: "No Product selected - Check product ID" }
+            });
             return;
         }
 
