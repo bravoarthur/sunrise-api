@@ -47,7 +47,8 @@ const AuthController = {
             res.json(errorOjectHandler('MasterPass', "Please, provide MasterPass"));
             return;
         }
-
+        console.log(data.masterPass)
+        console.log(process.env.SERVER_MASTER_PASSWORD)
         if(data.masterPass !== process.env.SERVER_MASTER_PASSWORD) {
             res.status(400);
             res.json(errorOjectHandler('MasterPass', "Master Password is invalid"));

@@ -42,7 +42,8 @@ router.post('/products/add', Auth.private, ProductsController.addProduct) // aut
 router.delete('/products/delete', Auth.private, ProductsController.productDelete) //auth
 
 // ORDER /////////////////////////////////////
-router.get('/order/list')
+router.get('/order/list', OrderController.orderList)
+router.get('/order/item/:id', OrderController.orderItem)
 router.post('/order/add', Auth.private, OrderController.addOrder) // auth
 router.post('/order/check', OrderController.addCheck)
 router.put('/order/finish',Auth.private, OrderController.finish ) //auth

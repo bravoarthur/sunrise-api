@@ -20,7 +20,7 @@ type FilterType = {
 
 const OrderController = {
     
-    productsList: async (req: Request, res: Response) => {         
+    orderList: async (req: Request, res: Response) => {         
         
         let { sort = "asc", offset = 0, limit = 8, suplier, status = 'OPEN' } = req.query;
         let filters: FilterType = { };
@@ -62,7 +62,8 @@ const OrderController = {
                 userchecker: orderData[i].userchecker? orderData[i].userchecker: '',
                 listOrder: orderData[i].listOrder,
                 listCheck: orderData[i].listCheck ? orderData[i].listCheck : [],
-                
+                admDesc: orderData[i].admDesc ? orderData[i].admDesc : '',
+                checkerDesc: orderData[i].checkerDesc ? orderData[i].checkerDesc : '',  
             });
         }
         
@@ -77,7 +78,7 @@ const OrderController = {
             return;  
         }*/
 
-        const {idAdm, idSuplier, listOrder } = req.body
+        const {idAdm, idSuplier, listOrder, desc } = req.body
         
         if(!isValidObjectId(idAdm) || !idAdm ) {
             res.json(errorOjectHandler('Order', 'Invalid user ID'));
@@ -99,7 +100,8 @@ const OrderController = {
             idSuplier: idSuplier.toString(),
             orderDate: new Date(),
             status: 'OPEN',
-            listOrder: listOrder     
+            listOrder: listOrder,
+            admDesc: desc,     
             
         })   
 
@@ -110,7 +112,7 @@ const OrderController = {
 
     addCheck: async (req: Request, res: Response) => {        
 
-        const {userChecker, checkOrder, idOrder } = req.body
+        const {userChecker, checkOrder, idOrder, checkerDesc } = req.body
 
         if(!isValidObjectId(idOrder) || !idOrder ) {
             res.json(errorOjectHandler('Order', 'Invalid user ID'));
@@ -139,7 +141,7 @@ const OrderController = {
             listCheck: checkOrder,
             status: 'DIVERGENT',
             checkDate: new Date(),
-            
+            checkerDesc: checkerDesc ? checkerDesc : ''            
         }
 
         
@@ -172,6 +174,48 @@ const OrderController = {
         await Orders.findByIdAndUpdate(idOrder, {$set:updates})
                
         res.json({status: 'Order Finished'})          
+        
+    },
+    
+    orderItem: async (req: Request, res: Response) => {        
+
+        /*let idOrder = ''
+        idOrder = req.params.id*/
+        const {id} = req.params
+
+        if(!isValidObjectId(id) || !id ) {
+            res.json(errorOjectHandler('Order', 'Invalid user ID'));
+            return; 
+        }       
+        
+        const order = await Orders.findById(id)
+        if(!order) {
+            res.json(errorOjectHandler('Order', 'The order Doesnt Exist'));
+            return;
+        }  
+        
+        const suplier = await Suplier.findById(order.idSuplier)
+        if(!suplier) {
+            res.json(errorOjectHandler('Order', 'The order Doesnt Exist'));
+            return;
+        }
+        
+        const orderResponse = {
+            _id: order._id,
+            idSuplier: order.idSuplier,
+            suplierName: suplier.name,
+            idAdm: order.idAdm,
+            userchequer: order.userchecker? order.userchecker : '',
+            orderDate: order.orderDate,
+            checkDate: order.checkDate? order.checkDate : '',
+            status: order.status,
+            listOrder: order.listOrder,
+            listCheck: order.listCheck ? order.listCheck : [],
+            admDesc: order.admDesc ? order.admDesc : '',
+            checkerDesc: order.checkerDesc ? order.checkerDesc : ''
+        }
+               
+        res.json({order: order})          
         
     },
 

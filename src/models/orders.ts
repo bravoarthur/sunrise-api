@@ -8,7 +8,9 @@ export type OrderType = {
     checkDate: Date;
     status: 'OPEN' | 'CLOSE' | 'DIVERGENT';
     listOrder: [{idProduct: string, product: string, qtd: number, image: string}];
-    listCheck: [{idProduct: string, product: string, qtd: number, image: string}]        
+    listCheck: [{idProduct: string, product: string, qtd: number, image: string}],
+    admDesc: string,
+    checkerDesc: string,        
 };
 
 const schema = new Schema<OrderType>({
@@ -19,7 +21,9 @@ const schema = new Schema<OrderType>({
     checkDate: Date,
     status: String,
     listOrder: [Object],
-    listCheck: [Object]    
+    listCheck: [Object],
+    admDesc: String,
+    checkerDesc: String,      
 });
 
 const modelName: string = "Order";
