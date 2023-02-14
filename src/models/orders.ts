@@ -7,7 +7,7 @@ export type OrderType = {
     orderDate: Date;
     checkDate: Date;
     status: 'OPEN' | 'CLOSE' | 'DIVERGENT';
-    listOrder: [{idProduct: string, product: string, qtd: number, image: string}];
+    listOrder: [{idProduct: string, product: string, qtd: number, image: string, divergent: boolean}];
     listCheck: [{idProduct: string, product: string, qtd: number, image: string}],
     admDesc: string,
     checkerDesc: string,        

@@ -36,7 +36,7 @@ const errorHandler: ErrorRequestHandler = (err, req: Request, res: Response, nex
 ) => {
     if (err.status) {
         res.status(err.status);
-        res.json({ error: err.message });
+        res.json({ error: err.error });
     } else {
         res.status(400); //bad request
         res.json({ error: "Server Error" });

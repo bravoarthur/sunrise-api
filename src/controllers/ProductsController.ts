@@ -21,22 +21,21 @@ const ProductsController = {
     productsList: async (req: Request, res: Response) => {   
         
         
-        let { sort = "asc", offset = 0, limit = 8, q, cat, status } = req.query;
+        let { sort = "asc", offset = 0, limit = 20, q, cat, status } = req.query;
         let filters: FilterType = { };
 
 
         if (q) {
             q = q as string;
-            filters.name = { $regex: q, $options: "i" };
+            filters.name = { $regex: `^${q}`, $options: "i" };
+            //filters.name = { $regex: `${q}`, $options: "i" };
         }
 
-        if (cat) {
-            const catFilter = await Categories.findOne({ slug: cat }).exec();
-            if (catFilter) {
-                filters.category = catFilter._id.toString();
-            }
+        if (cat) {            
+            filters.category = cat.toString();            
         }        
 
+        console.log(filters)
         const productsData = await Products.find(filters)
             .sort({ name: sort === "desc" ? -1 : 1 })
             .skip(parseInt(offset as string))
@@ -69,7 +68,7 @@ const ProductsController = {
     addProduct: async (req: Request, res: Response) => {
 
         let newName = ''
-
+        
         if(!req.body.newProduct) {
             res.json(errorOjectHandler('Product', 'Please, provide an Product to add'));
             return;
@@ -100,7 +99,8 @@ const ProductsController = {
             unit: req.body.unit.toString(),
             image: `default.jpg`
         })
-
+        
+        
         if (req.files) {
             let imgFile = req.files.img as UploadedFile;   
             

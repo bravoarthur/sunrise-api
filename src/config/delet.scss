@@ -1,0 +1,612 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 360px;
+    background-color: #EEE;
+    margin: 0 auto;
+
+    .topInputs {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 15px;        
+
+        .inputArea {
+            display: flex;   
+            flex-direction: column;                     
+            align-items: center;
+            font-size: 12px;
+            input {
+                width: 85%;
+                margin: 0 10px;
+                font-size: 12px;
+            }         
+        }
+
+        .buttonSend {
+            background-color: #0089FF;
+            border: 0;
+            outline: 0;
+            padding: 9px 7px;
+            border-radius: 4px;
+            color: #FFF;
+            font-size: 9px;
+            cursor: pointer;
+            margin: 12px;
+            transition: all ease 0.3s;
+            font-weight: 600;
+            width: 75px;
+                        
+            &:hover {
+               background-color: #006FCE;
+           }     
+        }
+    }  
+
+}
+
+
+
+.previewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .divergence {
+        display: flex;    
+        align-items: center;    
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;  
+
+        button {
+            background-color: #0089FF;
+            border: 0;
+            outline: 0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #FFF;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 10px;
+                        
+            &:hover {
+            background-color: #006FCE;
+        }             
+
+        }
+    }
+}
+
+.topInputs {
+    padding: 15px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-around;
+    input {
+        width: 210px;
+        
+    }
+}
+
+.tableInput {
+    width: 60%;
+    padding: 5px;
+    margin: 10px;
+    table {
+        width: 100%
+    }
+}
+
+.tablePreview {
+    border: 1px solid #999;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 12px;
+    background-color: #DDD;
+    width: 40%;
+
+    table {
+        width: 100%
+    }
+
+    tr {
+        min-width: 40%;
+    }
+}
+
+.buttonsArea {
+    display: flex;
+    min-width: 100%;
+    justify-content: center;
+}
+
+.buttonSend {
+    background-color: #0089FF;
+    border: 0;
+    outline: 0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #FFF;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 40px;
+                
+    &:hover {
+       background-color: #006FCE;
+   }               
+    
+
+}
+
+.errorMessage {
+    margin: 10px 0;
+    background-color: #FFCACA;
+    color: #000;
+    border: 2px solid #FF0000;
+    padding: 10px
+}
+
+.successMessage {
+    margin: 10px 0;
+    background-color: #caffd9;
+    color: #000;
+    border: 2px solid #00ff22;
+    padding: 10px;
+    
+}
+
+.confirmClass {
+    display: none
+}
+
+
+/////////////////////////////////////////////
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 360px;
+    background-color: #EEE;
+    margin: 0 auto;  
+
+    @media (min-width: 410px) and (max-width: 600px) {
+        width: 410px;
+        
+    }
+
+    @media (min-width: 600px) and (max-width: 750px) {
+        width: 600px;
+        
+    }
+
+    @media (min-width: 750px) and (max-width: 1000px) {
+        width: 750px;
+        
+    }
+
+    @media (min-width: 1000px) {
+        width: 1000px;
+        
+    }
+    
+
+    .descSuplier {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 15px;        
+
+        .inputDesc {
+            display: flex;   
+            flex-direction: column;                     
+            align-items: center;
+            font-size: 12px;
+            input {
+                width: 85%;
+                margin: 0 10px;
+                font-size: 12px;
+            }                
+            
+        }
+
+        .inputSuplier {
+            display: flex;        
+            flex-direction: column;    
+            align-items: center;  
+            font-size: 11px;
+            select {
+                width: 80%;
+                margin: 0 10px;
+                font-size: 13.5px;
+            }           
+    
+        }
+
+        .buttonSend {
+            background-color: #0089FF;
+            border: 0;
+            outline: 0;
+            padding: 9px 7px;
+            border-radius: 4px;
+            color: #FFF;
+            font-size: 9px;
+            cursor: pointer;
+            margin: 12px;
+            transition: all ease 0.3s;
+            font-weight: 600;
+            width: 75px;
+                        
+            &:hover {
+               background-color: #006FCE;
+           }     
+        }  
+
+        @media (min-width: 750px) and (max-width: 1000px) {
+
+            .inputDesc {                
+                flex-direction: row;
+                font-size:13px;
+                input {
+                    width: 70%;                    
+                    font-size: 13px;
+                }     
+            }
+    
+            .inputSuplier {
+                flex-direction: row;
+                font-size: 13px;   
+                select {
+                    font-size: 16px;
+                    width: 70%;                   
+                }    
+            }
+    
+            .buttonSend {                
+                padding: 8px 15px;                
+                font-size: 14px;                
+                margin: 25px;                
+                font-weight: 400;
+                width: 100px;  
+            }
+        }
+    
+        @media (min-width: 1000px) {
+            .inputDesc {                
+                flex-direction: row;
+                font-size: 15px; 
+                input {
+                    width: 70%;                    
+                    font-size: 14px;
+                }   
+            }
+            .inputSuplier {           
+                flex-direction: row;
+                font-size: 15px;   
+                select {
+                    font-size: 17px;
+                    width: 70%;                   
+                }     
+            }    
+            .buttonSend {                
+                padding: 8px 15px;                
+                font-size: 14px;                
+                margin: 25px;                
+                font-weight: 400;
+                width: 100px;   
+            }
+        }      
+    }    
+}
+
+.tableContainer {
+
+    display: flex;
+    max-width: 95%;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px #999;
+    padding-bottom: 30px;
+    margin-bottom: 70px;    
+
+    .FiltersBox{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;       
+        margin: 20px 0;
+        height: 30px;
+        font-size: 12px;
+        
+
+        .filterCategory{
+            margin-left: 12px;
+            margin-right: 10px; 
+            select {
+                width: 90%;
+                font-size: 10px;
+            }   
+        }
+        .filterText {
+            margin-left: 10px;
+            input {
+                width: 80%;
+                font-size: 9px
+            }
+        }
+    }
+
+    .tableBox {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        align-items: center;
+        
+        
+        .tableInput {
+            font-size: 11px;
+            width: 95%;
+            padding: 5px;
+            margin: 5px;  
+            height: 5px;             
+            
+            input {
+                width: 75%;
+                min-width: 35px;
+                font-size: 13px;
+            }
+            
+            .thProduct {
+                width: 100px;
+                text-align: left;
+                font-size: 11px;
+            }
+
+            .thUnit {
+                font-size: 11px;
+
+            }
+
+            .thQtd {
+                font-size: 11px;
+
+            }
+            
+            td {
+                height: 70px;
+            }
+            
+            td:first-child {                
+                width: 15%; 
+                border-bottom-left-radius: 8px;  
+                border-top-left-radius: 8px; 
+                vertical-align: center;
+                
+            }
+
+            td:nth-child(2) {               
+                width: 45%; 
+                text-align: left;
+                font-weight: 550;
+            }
+
+            td:nth-child(3) {                
+                width: 17%;                
+                white-space: nowrap;
+                text-align: center;
+            }
+
+            td:last-child {                
+                width: 23%;
+                text-align: center;
+                border-bottom-right-radius: 8px;  
+                border-top-right-radius: 8px; 
+            }
+
+            .trColor {
+            
+                background-color: #dad6d662;
+            }
+            
+        }
+
+        .tablePreview {
+            border: 1px solid #aeabab;
+            margin: 10px;
+            padding: 5px;
+            border-radius: 12px;
+            background-color: #dddddd8d;
+            width: 45%;
+            box-shadow: 0px 0px 20px #999;
+            height: 10px;
+            font-size: 8px;
+            //display: block;}
+            
+            th {
+                font-size: 8px;                
+            }
+          
+            td:first-child {                
+                width: 60%;                 
+                               
+            }            
+
+            td:nth-child(2) {                
+                width: 20%;                
+                white-space: nowrap;
+                text-align: center;
+            }
+
+            td:last-child {                
+                width: 20%;
+                text-align: center;
+                
+            }          
+            
+            td, tr {
+
+                height: 20px;
+                
+            }        
+            
+        }
+    }    
+
+    @media (min-width: 600px) and (max-width: 750px) {
+        min-width: 90%;
+        
+    }
+
+    @media (min-width: 750px) and (max-width: 1000px) {
+        min-width: 90%;
+
+        
+        .FiltersBox{            
+            font-size: 14px;            
+    
+            .filterCategory{                
+                select {                   
+                    font-size: 13px;
+                }   
+            }
+            .filterText {                
+                input {                   
+                    font-size: 12.5px
+                }
+            }
+        }
+
+        .tableBox {
+            flex-direction: row;
+            align-items: flex-start;
+            
+            
+            .tableInput {
+                margin-right: 5px; 
+                margin-left: 25px; 
+                width: 70%;
+                                                  
+                .thProduct {                    
+                    font-size: 13px;
+                }
+    
+                .thUnit {
+                    font-size: 13px;    
+                }
+    
+                .thQtd {
+                    font-size: 13px;    
+                }     
+            }
+    
+            .tablePreview {                
+                margin: 25px;                
+                width: 30%;                
+                font-size: 11px;
+                //display: block;}
+                
+                th {
+                    font-size: 9px;                
+                }         
+                
+                td, tr {
+    
+                    height: 30px;
+                }        
+            }
+        }       
+    }
+
+    @media (min-width: 1000px) {
+        min-width: 95%;
+
+        .FiltersBox{            
+            font-size: 16px;            
+    
+            .filterCategory{                
+                select {  
+                    font-size: 15px;
+                }   
+            }
+            .filterText {                
+                input {   
+                    font-size: 14.5px
+                }
+            }
+        }
+
+        .tableBox {
+            flex-direction: row;
+            align-items: flex-start; 
+
+            .tableInput {
+                font-size: 15px;
+                width: 60%;
+                padding: 5px;
+                margin: 10px;  
+                height: 10px; 
+
+                input {
+                    width: 60%;
+                    min-width: 50px;
+                    font-size: 14px;
+                }
+                                                              
+                .thProduct {                    
+                    font-size: 15px;
+                }
+    
+                .thUnit {
+                    font-size: 15px;    
+                }
+    
+                .thQtd {
+                    font-size: 15px;    
+                }    
+            }
+    
+            .tablePreview {                
+                margin: 25px;                
+                width: 40%;                
+                font-size: 14px;
+                //display: block;}
+                
+                th {
+                    font-size: 12px;                
+                }         
+                
+                td, tr {
+    
+                    height: 40px;
+                }        
+            }
+        }   
+    }
+}
+
+
+.image {    
+   border-radius: 7px;
+   margin: 10px;   
+}
+
+.errorMessage {
+    margin: 10px 0;
+    background-color: #FFCACA;
+    color: #000;
+    border: 2px solid #FF0000;
+    padding: 10px
+}
+
+.successMessage {
+    margin: 10px 0;
+    background-color: #caffd9;
+    color: #000;
+    border: 2px solid #00ff22;
+    padding: 10px;
+    
+}

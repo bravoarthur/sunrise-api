@@ -34,7 +34,7 @@ const AuthController = {
         await user.save();
 
         res.status(200);
-        res.json({ signup: "ok", token: token, email: user.email });
+        res.json({ signin: "ok", token: token, user: user._id });
     },
 
     signup: async (req: Request, res: Response) => {
@@ -85,7 +85,7 @@ const AuthController = {
 
         await newUser.save();
         res.status(201);
-        res.json({ signup: "ok", token: token });
+        res.json({ signup: "ok", token: token, user: newUser._id });
     }
 };
 

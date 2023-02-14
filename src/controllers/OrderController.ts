@@ -18,6 +18,15 @@ type FilterType = {
     name?: { [fieldname: string]: string };
 };
 
+type ListOrder = {
+    idProduct: string,
+    product: string, 
+    qtd: number,
+    image: string,
+    divergent: boolean
+}
+
+
 const OrderController = {
     
     orderList: async (req: Request, res: Response) => {         
@@ -101,7 +110,7 @@ const OrderController = {
             orderDate: new Date(),
             status: 'OPEN',
             listOrder: listOrder,
-            admDesc: desc,     
+            admDesc: desc? desc : '',     
             
         })   
 
@@ -112,7 +121,7 @@ const OrderController = {
 
     addCheck: async (req: Request, res: Response) => {        
 
-        const {userChecker, checkOrder, idOrder, checkerDesc } = req.body
+        const {userChecker, checkOrder, idOrder, checkerDesc, status, divergent } = req.body
 
         if(!isValidObjectId(idOrder) || !idOrder ) {
             res.json(errorOjectHandler('Order', 'Invalid user ID'));
@@ -133,17 +142,31 @@ const OrderController = {
             res.json(errorOjectHandler('Order', 'The order Doesnt Exist'));
             return;
         }
-        console.log(verifier)
-        console.log(idOrder)
+        
+        let listWithDivergences: ListOrder[] = []
+        if(divergent) {
+            if(divergent.length > 0) {
+                listWithDivergences = verifier.listOrder.map((item, index) => {
+                    if(divergent.includes(index)) {
+                        item.divergent = true
+                        return item
+                    } else {
+                        return item
+                    }
+                })
+
+            }
+        }              
 
         const updates = {
             userchecker: userChecker,
             listCheck: checkOrder,
-            status: 'DIVERGENT',
+            status: status,
             checkDate: new Date(),
-            checkerDesc: checkerDesc ? checkerDesc : ''            
+            checkerDesc: checkerDesc ? checkerDesc : '',
+            listOrder: listWithDivergences.length>0 ? listWithDivergences : verifier.listOrder,
+            
         }
-
         
         await Orders.findByIdAndUpdate(idOrder, {$set:updates})
                
